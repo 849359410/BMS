@@ -1,3 +1,2 @@
-/**
- * Created by ÖÜ»ª on 2017/9/11.
- */
+require('../common/header.js');
+require('../common/aside.js');
