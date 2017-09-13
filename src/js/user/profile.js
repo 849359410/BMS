@@ -37,4 +37,4 @@ $('#teacher-profile-form').ajaxForm({
             alert('修改成功');
         }
     }
-});
+})
