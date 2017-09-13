@@ -21,40 +21,50 @@
                     <li class="active">课程分类</li>
                 </ol>
                 <div class="category-add">
-                    <form action="" class="form-horizontal">
+                    <!-- 学科编辑模板的坑 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 学科编辑模板 -->
+    <script id="category-edit-tpl" type="text/tpl">
+        <form action="" class="form-horizontal">
                         <div class="form-group">
                             <label for="" class="col-xs-4 control-label">名称</label>
                             <div class="col-xs-3">
-                                <input name="" type="text" class="form-control input-sm" placeholder="填写分类名称">
+                                <input name="" value="{{ cg_name }}" type="text" class="form-control input-sm" placeholder="填写学科名称">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="" class="col-xs-4 control-label">所属分类</label>
+                            <label for="" class="col-xs-4 control-label">所属学科</label>
                             <div class="col-xs-2">
                                 <select name="" class="form-control input-sm">
-                                    <option value="">顶级分类</option>
-                                    <option value="">前端开发</option>
-                                    <option value="">后端开发</option>
-                                    <option value="">数据库</option>
-                                    <option value="">云计算&大数据</option>
-                                    <option value="">视觉设计</option>
+                                <!-- 每个学科都有一个cg_pid属性指向他的父 -->
+                                 <!-- 这里利用这个值与options中的value比较，对上了，就让这个option选中 -->
+                                    <option value="0">顶级分类</option>
+                                    {{ cach top categoryTop i }}
+                                    <option value="{{ categoryTop.cg_id }}" {{ cg_pid == categoryTop.cg_id? 'selected': '' }}>
+                                    {{ categoryTop.cg_name }}
+                                    </option>
+                                    {{ /cach }}
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="" class="col-xs-4 control-label">排序</label>
                             <div class="col-xs-1">
-                                <input name="" type="text" class="form-control input-sm" value="10">
+                                <input name="" value="{{ cg_order }}" type="text" class="form-control input-sm" value="10">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="" class="col-xs-4 control-label">是否显示</label>
                             <div class="col-xs-3">
                                 <label class="checkbox-inline">
-                                    <input value="" type="radio" checked> 是
+                                    <input value="" type="radio" {{ cg_is_hide == 0? 'checked': '' }}> 是
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input value="" type="radio"> 否
+                                    <input value="" type="radio" {{ cg_is_hide != 0? 'checked': '' }}> 否
                                 </label>
                             </div>
                         </div>
@@ -64,11 +74,7 @@
                             </div>
                         </div>
                     </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    </script>
     <script src="/dist/js/lib.js"></script>
 	<script src="/dist/js/category/edit.js"></script>
 </body>
